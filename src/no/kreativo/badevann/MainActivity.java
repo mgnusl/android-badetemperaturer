@@ -1,10 +1,9 @@
 package no.kreativo.badevann;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
 import no.kreativo.badevann.data.County;
 import no.kreativo.badevann.data.Place;
 import no.kreativo.badevann.utils.Utils;
@@ -16,7 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 
     private ArrayList<County> listOfCounties;
 
@@ -105,21 +104,18 @@ public class MainActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
             pDialog.dismiss();
-            int counter = 0;
-            for(County c : listOfCounties) {
-                for(Place p : c.getListOfPlaces())
-                    counter++;
-            }
-
-            Log.d("APP", "Number of counties " + listOfCounties.size());
-            Log.d("APP", "Number of places " + counter);
+            initializeFragments();
         }
 
         @Override
         protected void onPreExecute() {
             pDialog = new ProgressDialog(MainActivity.this);
-            pDialog.setMessage("Working...");
+            pDialog.setMessage("Henter data...");
             pDialog.show();
         }
+    }
+
+    public void initializeFragments() {
+
     }
 }
