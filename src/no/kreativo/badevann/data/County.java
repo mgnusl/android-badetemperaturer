@@ -9,6 +9,7 @@ public class County implements Parcelable {
 
     private String name;
     private ArrayList<Place> listOfPlaces;
+    private int id;
 
     public County() {
         listOfPlaces = new ArrayList<Place>();
@@ -30,6 +31,13 @@ public class County implements Parcelable {
         listOfPlaces.add(p);
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     /*
             Parcelable methods
@@ -54,10 +62,12 @@ public class County implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeList(listOfPlaces);
+        dest.writeInt(id);
     }
 
     public County(Parcel in) {
         name = in.readString();
         in.readList(listOfPlaces, null);
+        id = in.readInt();
     }
 }

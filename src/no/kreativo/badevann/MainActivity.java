@@ -3,7 +3,12 @@ package no.kreativo.badevann;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import com.astuetz.PagerSlidingTabStrip;
+import no.kreativo.badevann.adapter.ViewPagerAdapter;
 import no.kreativo.badevann.data.County;
 import no.kreativo.badevann.data.Place;
 import no.kreativo.badevann.utils.Utils;
@@ -14,10 +19,13 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
 
     private ArrayList<County> listOfCounties;
+    private ViewPager viewPager;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +67,7 @@ public class MainActivity extends ActionBarActivity {
 
                         if (xpp.getName().equalsIgnoreCase("county")) {
                             county = new County();
+                            county.setId(Integer.parseInt(xpp.getAttributeValue(null, "id")));
                             county.setName(xpp.getAttributeValue(null, "name"));
                         } else if (xpp.getName().equalsIgnoreCase("place")) {
                             // Inside place
@@ -116,6 +125,30 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void initializeFragments() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("counties", listOfCounties);
+
+        List<Fragment> fragments = new ArrayList<Fragment>();
+
+        OverviewListFragment listFragment = new OverviewListFragment();
+        MapFragment mapFragment = new MapFragment();
+        listFragment.setArguments(bundle);
+        mapFragment.setArguments(bundle);
+
+        fragments.add(mapFragment);
+        fragments.add(listFragment);
+
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        viewPager.setAdapter(new ViewPagerAdapter(fragmentManager, fragments));
+
+        // Bind the tabs to the ViewPager
+        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        tabs.setViewPager(viewPager);
+        //Style tabs
+        //tabs.setIndicatorColor(getResources().getColor(R.color.viewpager_indicator));
+        tabs.setShouldExpand(true);
 
     }
 }

@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#b4bc12">
+                android:background="#bad3ff">
 
     <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/tabs"

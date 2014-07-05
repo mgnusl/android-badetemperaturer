@@ -1,16 +1,30 @@
 package no.kreativo.badevann;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import no.kreativo.badevann.data.County;
+
+import java.util.ArrayList;
 
 public class OverviewListFragment extends Fragment {
 
+    private ArrayList<County> listOfCounties;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.overview_fragment, container, false);
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            listOfCounties = bundle.getParcelableArrayList("counties");
+        }
+
+
+        return view;
+
     }
 
     @Override
