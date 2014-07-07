@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class KartFragment extends Fragment {
         final LatLng shortcutWest = new LatLng(60.810763, 5.266706);
         final LatLng shortcutEast = new LatLng(59.9402, 10.7629);
 
-        map.setMyLocationEnabled(false);
+        map.setMyLocationEnabled(true);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultPosition, 5));
         map.setInfoWindowAdapter(new MyInfoWindowAdapter());
 
@@ -153,11 +154,20 @@ public class KartFragment extends Fragment {
             TextView lastUpdate = (TextView) contentsView.findViewById(R.id.windowLastUpdate);
             shortName.setText(place.getShortName());
             longName.setText(place.getLongName());
-            airTemp.setText(Html.fromHtml("<b>Lufttemperatur: </b>" + place.getAirTemp() + "°C"));
+
+            if(!place.getAirTemp().equals(""))
+                airTemp.setText(Html.fromHtml("<b>Lufttemperatur: </b>" + place.getAirTemp() + "°C"));
+            else
+                airTemp.setText(Html.fromHtml("<b>Lufttemperatur: </b> -"));
+
+            if(!place.getWeatherDescription().equals(""))
+                weather.setText(Html.fromHtml("<b>Vær: </b>" + place.getWeatherDescription()));
+            else
+                weather.setText(Html.fromHtml("<b>Vær: </b> - "));
+
             temp.setText(Integer.toString(place.getWaterTemp()) + "°C");
-            weather.setText(Html.fromHtml("<b>Vær: </b>" + place.getWeatherDescription()));
             kommune.setText(Html.fromHtml("<b>Kommune: </b>" + place.getMunicipality()));
-            lastUpdate.setText(Html.fromHtml("<b>Sist oppdatert: </b>" + place.getLastUpdated()));
+            lastUpdate.setText(Html.fromHtml("<b>Sist oppdatert: </b>" + place.getTimeElapsedFromLastUpdate()));
 
             return contentsView;
         }

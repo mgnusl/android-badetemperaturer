@@ -2,12 +2,17 @@ package no.kreativo.badevann.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import org.joda.time.DateTime;
+import org.joda.time.Period;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
 
 public class Place implements Parcelable {
 
     private int waterTemp;
-    private String shortName, longName, municipality, weatherDescription, lastUpdated, placeID, airTemp;
+    private String shortName, longName, municipality, weatherDescription, placeID, airTemp;
     private double geo_lat, geo_long;
+    private DateTime lastUpdated;
 
     public Place() {
     }
@@ -30,10 +35,6 @@ public class Place implements Parcelable {
 
     public void setWeatherDescription(String weatherDescription) {
         this.weatherDescription = weatherDescription;
-    }
-
-    public void setLastUpdated(String lastUpdated) {
-        this.lastUpdated = lastUpdated;
     }
 
     public void setPlaceID(String placeID) {
@@ -72,10 +73,6 @@ public class Place implements Parcelable {
         return weatherDescription;
     }
 
-    public String getLastUpdated() {
-        return lastUpdated;
-    }
-
     public String getPlaceID() {
         return placeID;
     }
@@ -92,6 +89,36 @@ public class Place implements Parcelable {
         return geo_long;
     }
 
+    public DateTime getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(DateTime lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    public String getTimeElapsedFromLastUpdate() {
+        DateTime now = new DateTime();
+        Period period = new Period(lastUpdated, now);
+
+        PeriodFormatter formatter = new PeriodFormatterBuilder()
+                .printZeroNever()
+                .appendWeeks()
+                .appendSuffix(" uke", " uker")
+                .appendSeparator(", ")
+                .appendDays()
+                .appendSuffix(" dag", " dager")
+                .appendSeparator(", ")
+                .appendHours()
+                .appendSuffix(" time", " timer")
+                .appendSeparator(", ")
+                .appendMinutes()
+                .appendSuffix(" minutt", " minutter")
+                .appendSeparator(", ")
+                .toFormatter();
+        return formatter.print(period) + " siden";
+    }
+
     @Override
     public String toString() {
         return "Place{" +
@@ -100,11 +127,11 @@ public class Place implements Parcelable {
                 ", longName='" + longName + '\'' +
                 ", municipality='" + municipality + '\'' +
                 ", weatherDescription='" + weatherDescription + '\'' +
-                ", lastUpdated='" + lastUpdated + '\'' +
                 ", placeID='" + placeID + '\'' +
                 ", airTemp='" + airTemp + '\'' +
                 ", geo_lat=" + geo_lat +
                 ", geo_long=" + geo_long +
+                ", lastUpdated=" + lastUpdated +
                 '}';
     }
 
@@ -134,11 +161,12 @@ public class Place implements Parcelable {
         dest.writeString(longName);
         dest.writeString(municipality);
         dest.writeString(weatherDescription);
-        dest.writeString(lastUpdated);
         dest.writeString(placeID);
         dest.writeString(airTemp);
         dest.writeDouble(geo_lat);
         dest.writeDouble(geo_long);
+        dest.writeString(lastUpdated.toString());
+
     }
 
     public Place(Parcel in) {
@@ -147,10 +175,10 @@ public class Place implements Parcelable {
         longName = in.readString();
         municipality = in.readString();
         weatherDescription = in.readString();
-        lastUpdated = in.readString();
         placeID = in.readString();
         airTemp = in.readString();
         geo_lat = in.readDouble();
         geo_long = in.readDouble();
+        lastUpdated = DateTime.parse(in.readString());
     }
 }

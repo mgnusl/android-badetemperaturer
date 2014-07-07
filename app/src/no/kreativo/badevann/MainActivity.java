@@ -7,11 +7,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import com.astuetz.PagerSlidingTabStrip;
 import no.kreativo.badevann.adapter.ViewPagerAdapter;
 import no.kreativo.badevann.data.County;
 import no.kreativo.badevann.data.Place;
 import no.kreativo.badevann.utils.Utils;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -25,7 +31,6 @@ public class MainActivity extends ActionBarActivity {
 
     private ArrayList<County> listOfCounties;
     private ViewPager viewPager;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,8 @@ public class MainActivity extends ActionBarActivity {
 
             try {
                 URL url = new URL(params[0]);
+
+                DateTimeFormatter parser = ISODateTimeFormat.dateTimeNoMillis();
 
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(false);
@@ -88,9 +95,9 @@ public class MainActivity extends ActionBarActivity {
                             if (!xpp.isEmptyElementTag()) {
                                 place.setWeatherDescription(xpp.nextText());
                             }
-
                         } else if (xpp.getName().equalsIgnoreCase("updated")) {
-                            place.setLastUpdated(xpp.nextText());
+                            DateTime dateTime = parser.parseDateTime(xpp.nextText() + "+0200");
+                            place.setLastUpdated(dateTime);
                         }
 
                     } else if (eventType == XmlPullParser.END_TAG && xpp.getName().equalsIgnoreCase("county")) {
@@ -155,6 +162,28 @@ public class MainActivity extends ActionBarActivity {
         tabs.setIndicatorColor(getResources().getColor(R.color.viewpager_indicator_color));
         tabs.setShouldExpand(false);
 
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_main, menu);
+
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                new AsyncHandleXML().execute("http://om.yr.no/badetemperatur/badetemperatur.xml");
+                return true;
+            case R.id.action_settings:
+                //startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 }
