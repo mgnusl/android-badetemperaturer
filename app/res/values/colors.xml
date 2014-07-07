@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="actionbar_color">#0096D2</color>
+    <color name="section_header_color">#0078a8</color>
+    <color name="list_item_color">#fcfcfc</color>
+
+    <color name="header_text_color">#fcfcfc</color>
+
+    <color name="viewpager_indicator_color">#0078a8</color>
+</resources>

@@ -5,6 +5,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import com.applidium.headerlistview.HeaderListView;
+import no.kreativo.badevann.adapter.OverviewListAdapter;
 import no.kreativo.badevann.data.County;
 
 import java.util.ArrayList;
@@ -21,6 +24,10 @@ public class OverviewListFragment extends Fragment {
         if (bundle != null) {
             listOfCounties = bundle.getParcelableArrayList("counties");
         }
+
+        HeaderListView listView = (HeaderListView)view.findViewById(R.id.overviewListView);
+
+        listView.setAdapter(new OverviewListAdapter(getActivity(), listOfCounties));
 
 
         return view;

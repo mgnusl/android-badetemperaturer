@@ -29,6 +29,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
             return "Kart";
         if (position == 1)
             return "Oversikt";
+        if (position == 2)
+            return "Favoritter";
         return null;
     }
 }

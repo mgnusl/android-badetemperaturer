@@ -6,9 +6,9 @@
               android:layout_height="match_parent"
               android:background="#656565">
 
-    <ListView
+    <com.applidium.headerlistview.HeaderListView
         android:id="@+id/overviewListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="match_parent">
+    </com.applidium.headerlistview.HeaderListView>
 </LinearLayout>

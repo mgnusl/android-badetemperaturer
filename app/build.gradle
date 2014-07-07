@@ -46,4 +46,6 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+    compile project(":HeaderListView")
+
 }

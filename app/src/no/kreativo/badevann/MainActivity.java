@@ -132,11 +132,14 @@ public class MainActivity extends ActionBarActivity {
 
         OverviewListFragment listFragment = new OverviewListFragment();
         MapFragment mapFragment = new MapFragment();
+        FavoritesFragment favoritesFragment = new FavoritesFragment();
         listFragment.setArguments(bundle);
         mapFragment.setArguments(bundle);
+        favoritesFragment.setArguments(bundle);
 
         fragments.add(mapFragment);
         fragments.add(listFragment);
+        fragments.add(favoritesFragment);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
 
@@ -146,8 +149,9 @@ public class MainActivity extends ActionBarActivity {
         // Bind the tabs to the ViewPager
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabs.setViewPager(viewPager);
+
         //Style tabs
-        //tabs.setIndicatorColor(getResources().getColor(R.color.viewpager_indicator));
+        tabs.setIndicatorColor(getResources().getColor(R.color.viewpager_indicator_color));
         tabs.setShouldExpand(true);
 
     }
