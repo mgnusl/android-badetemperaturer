@@ -7,4 +7,6 @@
     <color name="header_text_color">#fcfcfc</color>
 
     <color name="viewpager_indicator_color">#0078a8</color>
+
+    <color name="bg">#eaeaea</color>
 </resources>

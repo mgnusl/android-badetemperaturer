@@ -145,6 +145,7 @@ public class MainActivity extends ActionBarActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         viewPager.setAdapter(new ViewPagerAdapter(fragmentManager, fragments));
+        viewPager.setCurrentItem(1);
 
         // Bind the tabs to the ViewPager
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
