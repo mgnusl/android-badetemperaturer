@@ -3,6 +3,7 @@ package no.kreativo.badevann;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ public class KartFragment extends Fragment {
 
     private ArrayList<County> listOfCounties;
     private HashMap<Marker, Place> markerMap;
+    private GoogleMap map;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class KartFragment extends Fragment {
         markerMap = new HashMap<Marker, Place>();
 
         // Get a handle to the Map Fragment
-        GoogleMap map = ((SupportMapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+        map = ((SupportMapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 
         LatLng defaultPosition = new LatLng(61.7150, 9.1753);
 
@@ -57,6 +59,14 @@ public class KartFragment extends Fragment {
             }
         }
 
+        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Place place = markerMap.get(marker);
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(place.getGeo_lat(), place.getGeo_long()), 14));
+            }
+        });
+
         return view;
 
     }
@@ -66,6 +76,17 @@ public class KartFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    public void onDestroyView ()
+    {
+        try{
+            SupportMapFragment fragment = ((SupportMapFragment) getFragmentManager().findFragmentById(R.id.map));
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.remove(fragment);
+            ft.commit();
+        }catch(Exception e){
+        }
+        super.onDestroyView();
+    }
 
     private class MyInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
@@ -90,8 +111,8 @@ public class KartFragment extends Fragment {
             airTemp.setText(Html.fromHtml("<b>Lufttemperatur: </b>" + place.getAirTemp() + "°C"));
             temp.setText(Integer.toString(place.getWaterTemp()) + "°C");
             weather.setText(Html.fromHtml("<b>Vær: </b>" + place.getWeatherDescription()));
-            kommune.setText(Html.fromHtml("<b>Kommune: </b>" +place.getMunicipality()));
-            lastUpdate.setText(Html.fromHtml("<b>Sist oppdatert: </b>" +place.getLastUpdated()));
+            kommune.setText(Html.fromHtml("<b>Kommune: </b>" + place.getMunicipality()));
+            lastUpdate.setText(Html.fromHtml("<b>Sist oppdatert: </b>" + place.getLastUpdated()));
 
             return contentsView;
         }
