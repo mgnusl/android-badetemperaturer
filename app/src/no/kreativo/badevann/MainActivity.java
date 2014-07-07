@@ -131,13 +131,13 @@ public class MainActivity extends ActionBarActivity {
         List<Fragment> fragments = new ArrayList<Fragment>();
 
         OverviewListFragment listFragment = new OverviewListFragment();
-        MapFragment mapFragment = new MapFragment();
+        KartFragment kartFragment = new KartFragment();
         FavoritesFragment favoritesFragment = new FavoritesFragment();
         listFragment.setArguments(bundle);
-        mapFragment.setArguments(bundle);
+        kartFragment.setArguments(bundle);
         favoritesFragment.setArguments(bundle);
 
-        fragments.add(mapFragment);
+        fragments.add(kartFragment);
         fragments.add(listFragment);
         fragments.add(favoritesFragment);
 
@@ -152,7 +152,8 @@ public class MainActivity extends ActionBarActivity {
 
         //Style tabs
         tabs.setIndicatorColor(getResources().getColor(R.color.viewpager_indicator_color));
-        tabs.setShouldExpand(true);
+        tabs.setShouldExpand(false);
+
 
     }
 }
