@@ -122,6 +122,7 @@ public class KartFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    @Override
     public void onDestroyView() {
         try {
             SupportMapFragment fragment = ((SupportMapFragment) getFragmentManager().findFragmentById(R.id.map));
@@ -132,6 +133,19 @@ public class KartFragment extends Fragment {
             e.printStackTrace();
         }
         super.onDestroyView();
+    }
+
+    @Override
+    public void onPause() {
+        try {
+            SupportMapFragment fragment = ((SupportMapFragment) getFragmentManager().findFragmentById(R.id.map));
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.remove(fragment);
+            ft.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        super.onPause();
     }
 
     private class MyInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {

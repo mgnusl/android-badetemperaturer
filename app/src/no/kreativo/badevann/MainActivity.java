@@ -30,6 +30,7 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     private ArrayList<County> listOfCounties;
+    private ArrayList<Place> listOfFavorites;
     private ViewPager viewPager;
 
     @Override
@@ -38,6 +39,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.main);
 
         listOfCounties = new ArrayList<County>();
+        listOfFavorites = new ArrayList<Place>();
 
         new AsyncHandleXML().execute("http://om.yr.no/badetemperatur/badetemperatur.xml");
 
@@ -135,6 +137,9 @@ public class MainActivity extends ActionBarActivity {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("counties", listOfCounties);
 
+        Bundle favBundle = new Bundle();
+        favBundle.putParcelableArrayList("favorites", listOfFavorites);
+
         List<Fragment> fragments = new ArrayList<Fragment>();
 
         OverviewListFragment listFragment = new OverviewListFragment();
@@ -142,7 +147,7 @@ public class MainActivity extends ActionBarActivity {
         FavoritesFragment favoritesFragment = new FavoritesFragment();
         listFragment.setArguments(bundle);
         kartFragment.setArguments(bundle);
-        favoritesFragment.setArguments(bundle);
+        favoritesFragment.setArguments(favBundle);
 
         fragments.add(kartFragment);
         fragments.add(listFragment);

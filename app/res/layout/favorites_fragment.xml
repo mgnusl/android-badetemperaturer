@@ -3,18 +3,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#800000">
+                android:layout_height="match_parent">
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/favoritesListView"></ListView>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="FAVORITTER"
-        android:textSize="60sp"
-        android:textColor="#ffffff"
+        android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Ingen favoritter. \n Gå til 'Oversikt' for å legge til favoritter"
+        android:textSize="30sp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:id="@+id/aa"
-        android:layout_gravity="right"/>
+        android:fontFamily="sans-serif-light"
+        />
 
 </RelativeLayout>
