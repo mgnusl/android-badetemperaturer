@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="no.kreativo.badevann"
+          package="no.kreativo.badetemperaturer"
           android:versionCode="1"
           android:versionName="1.0">
 
@@ -8,17 +8,15 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="no.kreativo.badevann.locationapi.maps.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
 
     <application
         android:label="@string/app_name"
         android:icon="@drawable/ic_launcher"
         android:theme="@style/CustomActionBarTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="no.kreativo.badetemperaturer.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -32,7 +30,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDexmvctz4oRcdx2KIr3VYEJPR1zA0xp70"/>
+            android:value="AIzaSyClFXOSB5puB-naXevWkLnsWKoAz24p2jE"/>
     </application>
 
     <uses-feature

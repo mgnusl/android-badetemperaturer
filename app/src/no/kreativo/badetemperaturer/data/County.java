@@ -1,4 +1,4 @@
-package no.kreativo.badevann.data;
+package no.kreativo.badetemperaturer.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;

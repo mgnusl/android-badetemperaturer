@@ -1,4 +1,4 @@
-package no.kreativo.badevann.adapter;
+package no.kreativo.badetemperaturer.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
 import com.applidium.headerlistview.SectionAdapter;
-import no.kreativo.badevann.R;
-import no.kreativo.badevann.data.County;
-import no.kreativo.badevann.data.Place;
+import no.kreativo.badetemperaturer.R;
+import no.kreativo.badetemperaturer.data.County;
+import no.kreativo.badetemperaturer.data.Place;
 
 import java.util.ArrayList;
 

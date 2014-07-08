@@ -1,4 +1,4 @@
-package no.kreativo.badevann;
+package no.kreativo.badetemperaturer;
 
 import android.app.Application;
 

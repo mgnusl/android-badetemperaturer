@@ -1,4 +1,4 @@
-package no.kreativo.badevann;
+package no.kreativo.badetemperaturer;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,9 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
-import no.kreativo.badevann.adapter.FavoritesListAdapter;
-import no.kreativo.badevann.data.Place;
-import org.w3c.dom.Text;
+import no.kreativo.badetemperaturer.adapter.FavoritesListAdapter;
+import no.kreativo.badetemperaturer.data.Place;
 
 import java.util.ArrayList;
 

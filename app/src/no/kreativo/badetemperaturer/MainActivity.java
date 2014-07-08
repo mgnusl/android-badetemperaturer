@@ -1,26 +1,32 @@
-package no.kreativo.badevann;
+package no.kreativo.badetemperaturer;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
+import android.widget.TextView;
 import com.astuetz.PagerSlidingTabStrip;
 import de.psdev.licensesdialog.LicensesDialog;
 import de.psdev.licensesdialog.licenses.ApacheSoftwareLicense20;
 import de.psdev.licensesdialog.model.Notice;
 import de.psdev.licensesdialog.model.Notices;
-import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
-import no.kreativo.badevann.adapter.ViewPagerAdapter;
-import no.kreativo.badevann.data.County;
-import no.kreativo.badevann.data.Place;
-import no.kreativo.badevann.utils.Utils;
+import fr.nicolaspomepuy.discreetapprate.AppRate;
+import fr.nicolaspomepuy.discreetapprate.RetryPolicy;
+import no.kreativo.badetemperaturer.adapter.ViewPagerAdapter;
+import no.kreativo.badetemperaturer.data.County;
+import no.kreativo.badetemperaturer.data.Place;
+import no.kreativo.badetemperaturer.utils.Utils;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
@@ -49,6 +55,9 @@ public class MainActivity extends ActionBarActivity {
         listOfFavorites = new ArrayList<Place>();
 
         new AsyncHandleXML().execute("http://om.yr.no/badetemperatur/badetemperatur.xml");
+
+        AppRate.with(this).initialLaunchCount(3).retryPolicy(RetryPolicy.EXPONENTIAL)
+                .checkAndShow();
 
     }
 
@@ -150,13 +159,13 @@ public class MainActivity extends ActionBarActivity {
         List<Fragment> fragments = new ArrayList<Fragment>();
 
         OverviewListFragment listFragment = new OverviewListFragment();
-        //KartFragment kartFragment = new KartFragment();
+        KartFragment kartFragment = new KartFragment();
         FavoritesFragment favoritesFragment = new FavoritesFragment();
         listFragment.setArguments(bundle);
-        //kartFragment.setArguments(bundle);
+        kartFragment.setArguments(bundle);
         favoritesFragment.setArguments(favBundle);
 
-        //fragments.add(kartFragment);
+        fragments.add(kartFragment);
         fragments.add(listFragment);
         fragments.add(favoritesFragment);
 
@@ -188,24 +197,34 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void showAboutPopup() {
-        SimpleDialogFragment.createBuilder(this, getSupportFragmentManager())
-                .setTitle(R.string.about)
-                .setMessage(R.string.about_message)
-                .setPositiveButtonText("Lukk")
-                .show();
 
+        final AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle(getResources().getString(R.string.about))
+                .setMessage(Html.fromHtml("<a href=\"http://www.yr.no/observasjonar/badetemperaturar.html\n\">Badetemperaturene blir " +
+                        "rapportert til yr.no og Reiseradioen av hver enkelt campingplass/badestrand. Målingene følger ikke vanlig " +
+                        "meteorologisk standard, men gir en god indikasjon på vanntemperaturen. Badetemperaturene i Oslo er levert " +
+                        "av Oslo kommune, Akershus av badevann.no.</a>"))
+                .setPositiveButton(R.string.close, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        dialog.show();
+
+        ((TextView) dialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
 
     }
 
     private void showLicensesPopup() {
         final Notices notices = new Notices();
-        notices.addNotice(new Notice("LicensesDialog", "https://github.com/PSDev/LicensesDialogg", "Philip Schiffer", new ApacheSoftwareLicense20()));
         notices.addNotice(new Notice("HeaderListView", "https://github.com/applidium/HeaderListView", "applidium", new ApacheSoftwareLicense20()));
-        notices.addNotice(new Notice("android-styled-dialogs", "https://github.com/inmite/android-styled-dialogs", "inmite", new ApacheSoftwareLicense20()));
         notices.addNotice(new Notice("discreet-app-rate", "https://github.com/PomepuyN/discreet-app-rate", "PomepuyN", new ApacheSoftwareLicense20()));
         notices.addNotice(new Notice("Joda-Time", "http://www.joda.org/joda-time/", "JodaOrg", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice("LicensesDialog", "https://github.com/PSDev/LicensesDialog", "PSDev", new ApacheSoftwareLicense20()));
         notices.addNotice(new Notice("PagerSlidingTabStrip", "https://github.com/astuetz/PagerSlidingTabStrip", "astuetz", new ApacheSoftwareLicense20()));
         new LicensesDialog(this, notices, false, false).show();
+
     }
 
     @Override
@@ -225,8 +244,10 @@ public class MainActivity extends ActionBarActivity {
                 return true;
             case R.id.action_about:
                 showAboutPopup();
+                return true;
             case R.id.action_licenses:
                 showLicensesPopup();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
 

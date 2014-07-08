@@ -1,4 +1,4 @@
-package no.kreativo.badevann.utils;
+package no.kreativo.badetemperaturer.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

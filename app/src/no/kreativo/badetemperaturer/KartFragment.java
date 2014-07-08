@@ -1,11 +1,10 @@
-package no.kreativo.badevann;
+package no.kreativo.badetemperaturer;
 
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +16,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import no.kreativo.badevann.data.County;
-import no.kreativo.badevann.data.Place;
+import no.kreativo.badetemperaturer.data.County;
+import no.kreativo.badetemperaturer.data.Place;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,10 +75,10 @@ public class KartFragment extends Fragment {
         });
 
         // Set button listeners
-        southButton = (Button)view.findViewById(R.id.sorButton);
-        northButton = (Button)view.findViewById(R.id.nordButton);
-        westButton = (Button)view.findViewById(R.id.vestButton);
-        eastButton = (Button)view.findViewById(R.id.ostButton);
+        southButton = (Button) view.findViewById(R.id.sorButton);
+        northButton = (Button) view.findViewById(R.id.nordButton);
+        westButton = (Button) view.findViewById(R.id.vestButton);
+        eastButton = (Button) view.findViewById(R.id.ostButton);
 
         southButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,9 +125,11 @@ public class KartFragment extends Fragment {
     public void onDestroyView() {
         try {
             SupportMapFragment fragment = ((SupportMapFragment) getFragmentManager().findFragmentById(R.id.map));
-            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-            ft.remove(fragment);
-            ft.commit();
+            if (fragment != null) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.remove(fragment);
+                ft.commit();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -139,9 +140,11 @@ public class KartFragment extends Fragment {
     public void onPause() {
         try {
             SupportMapFragment fragment = ((SupportMapFragment) getFragmentManager().findFragmentById(R.id.map));
-            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-            ft.remove(fragment);
-            ft.commit();
+            if (fragment != null) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.remove(fragment);
+                ft.commit();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -169,12 +172,12 @@ public class KartFragment extends Fragment {
             shortName.setText(place.getShortName());
             longName.setText(place.getLongName());
 
-            if(!place.getAirTemp().equals(""))
+            if (!place.getAirTemp().equals(""))
                 airTemp.setText(Html.fromHtml("<b>Lufttemperatur: </b>" + place.getAirTemp() + "°C"));
             else
                 airTemp.setText(Html.fromHtml("<b>Lufttemperatur: </b> -"));
 
-            if(!place.getWeatherDescription().equals(""))
+            if (!place.getWeatherDescription().equals(""))
                 weather.setText(Html.fromHtml("<b>Vær: </b>" + place.getWeatherDescription()));
             else
                 weather.setText(Html.fromHtml("<b>Vær: </b> - "));

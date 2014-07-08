@@ -1,4 +1,4 @@
-package no.kreativo.badevann.adapter;
+package no.kreativo.badetemperaturer.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

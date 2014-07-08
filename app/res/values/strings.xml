@@ -4,8 +4,9 @@
 
     <string name="refresh">Oppdater</string>
     <string name="about">Om</string>
-    <string name="licenses">Lisenser</string>
+    <string name="lisenser">Lisenser</string>
     <string name="remove_ads">Fjern reklame</string>
 
-    <string name="about_message">Badetemperaturer bruker data fra yr.no</string>
+    <string name="close">Lukk</string>
+
 </resources>
