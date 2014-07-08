@@ -56,7 +56,7 @@ public class OverviewListAdapter extends SectionAdapter {
         placeTextView.setText(place.getShortName());
 
         TextView tempTextView = (TextView)convertView.findViewById(R.id.tempTextView);
-        tempTextView.setText(Integer.toString(place.getWaterTemp()) + "°C");
+        tempTextView.setText(Double.toString(Double.parseDouble(Integer.toString(place.getWaterTemp()))) + "°C");
 
         return convertView;
 

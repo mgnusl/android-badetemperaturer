@@ -1,5 +1,6 @@
 package no.kreativo.badevann;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -25,10 +26,13 @@ public class OverviewListFragment extends Fragment {
             listOfCounties = bundle.getParcelableArrayList("counties");
         }
 
-        HeaderListView listView = (HeaderListView)view.findViewById(R.id.overviewListView);
+        HeaderListView listView = (HeaderListView) view.findViewById(R.id.overviewListView);
 
         listView.setAdapter(new OverviewListAdapter(getActivity(), listOfCounties));
 
+        ListView lv = listView.getListView();
+        lv.setDivider(new ColorDrawable(getResources().getColor(R.color.list_divider)));
+        lv.setDividerHeight(1);
 
         return view;
 

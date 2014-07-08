@@ -11,14 +11,26 @@
         android:id="@+id/favoritesListView"></ListView>
 
     <TextView
-        android:id="@android:id/empty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Ingen favoritter. \n Gå til 'Oversikt' for å legge til favoritter"
-        android:textSize="30sp"
+        android:id="@+id/empty1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingen favoritter."
+        android:textSize="20sp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:fontFamily="sans-serif-light"
+        />
+
+    <TextView
+        android:id="@+id/empty2"
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gå til 'Oversikt' for å legge til favoritter."
+        android:textSize="13sp"
+        android:fontFamily="sans-serif-light"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/empty1"
         />
 
 </RelativeLayout>

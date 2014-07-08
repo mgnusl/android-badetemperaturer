@@ -143,13 +143,13 @@ public class MainActivity extends ActionBarActivity {
         List<Fragment> fragments = new ArrayList<Fragment>();
 
         OverviewListFragment listFragment = new OverviewListFragment();
-        KartFragment kartFragment = new KartFragment();
+        //KartFragment kartFragment = new KartFragment();
         FavoritesFragment favoritesFragment = new FavoritesFragment();
         listFragment.setArguments(bundle);
-        kartFragment.setArguments(bundle);
+        //kartFragment.setArguments(bundle);
         favoritesFragment.setArguments(favBundle);
 
-        fragments.add(kartFragment);
+        //fragments.add(kartFragment);
         fragments.add(listFragment);
         fragments.add(favoritesFragment);
 
