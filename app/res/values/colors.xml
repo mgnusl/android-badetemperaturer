@@ -11,4 +11,9 @@
     <color name="list_divider">#7f7f7f</color>
 
     <color name="bg">#eaeaea</color>
+    <color name="dark_bg">#dddddd</color>
+
+    <color name="dark_blue">#546399</color>
+    <color name="dark_grey">#444444</color>
+
 </resources>

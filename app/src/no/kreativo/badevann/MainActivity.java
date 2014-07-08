@@ -10,7 +10,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.ViewConfiguration;
 import com.astuetz.PagerSlidingTabStrip;
+import de.psdev.licensesdialog.LicensesDialog;
+import de.psdev.licensesdialog.licenses.ApacheSoftwareLicense20;
+import de.psdev.licensesdialog.model.Notice;
+import de.psdev.licensesdialog.model.Notices;
+import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 import no.kreativo.badevann.adapter.ViewPagerAdapter;
 import no.kreativo.badevann.data.County;
 import no.kreativo.badevann.data.Place;
@@ -23,6 +29,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -167,6 +174,38 @@ public class MainActivity extends ActionBarActivity {
         tabs.setIndicatorColor(getResources().getColor(R.color.viewpager_indicator_color));
         tabs.setShouldExpand(false);
 
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            if (menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, false);
+            }
+        } catch (Exception ex) {
+            // Ignore
+        }
+
+    }
+
+    private void showAboutPopup() {
+        SimpleDialogFragment.createBuilder(this, getSupportFragmentManager())
+                .setTitle(R.string.about)
+                .setMessage(R.string.about_message)
+                .setPositiveButtonText("Lukk")
+                .show();
+
+
+    }
+
+    private void showLicensesPopup() {
+        final Notices notices = new Notices();
+        notices.addNotice(new Notice("LicensesDialog", "https://github.com/PSDev/LicensesDialogg", "Philip Schiffer", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice("HeaderListView", "https://github.com/applidium/HeaderListView", "applidium", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice("android-styled-dialogs", "https://github.com/inmite/android-styled-dialogs", "inmite", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice("discreet-app-rate", "https://github.com/PomepuyN/discreet-app-rate", "PomepuyN", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice("Joda-Time", "http://www.joda.org/joda-time/", "JodaOrg", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice("PagerSlidingTabStrip", "https://github.com/astuetz/PagerSlidingTabStrip", "astuetz", new ApacheSoftwareLicense20()));
+        new LicensesDialog(this, notices, false, false).show();
     }
 
     @Override
@@ -184,8 +223,10 @@ public class MainActivity extends ActionBarActivity {
             case R.id.action_refresh:
                 new AsyncHandleXML().execute("http://om.yr.no/badetemperatur/badetemperatur.xml");
                 return true;
-            case R.id.action_settings:
-                //startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
+            case R.id.action_about:
+                showAboutPopup();
+            case R.id.action_licenses:
+                showLicensesPopup();
             default:
                 return super.onOptionsItemSelected(item);
 

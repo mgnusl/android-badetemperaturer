@@ -3,6 +3,9 @@
     <string name="app_name">Badetemperaturer</string>
 
     <string name="refresh">Oppdater</string>
-    <string name="settings">Innstillinger</string>
+    <string name="about">Om</string>
+    <string name="licenses">Lisenser</string>
     <string name="remove_ads">Fjern reklame</string>
+
+    <string name="about_message">Badetemperaturer bruker data fra yr.no</string>
 </resources>

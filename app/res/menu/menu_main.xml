@@ -7,13 +7,19 @@
         android:title="@string/refresh"
         avisreader:showAsAction="always|collapseActionView"/>
 
-    <item
-        android:id="@+id/action_settings"
-        android:title="@string/settings"
-        avisreader:showAsAction="never"/>
 
     <item
         android:id="@+id/remove_ads"
         android:title="@string/remove_ads"
+        avisreader:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_about"
+        android:title="@string/about"
+        avisreader:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_licenses"
+        android:title="@string/licenses"
         avisreader:showAsAction="never"/>
 </menu>
