@@ -156,6 +156,15 @@ public class MainActivity extends ActionBarActivity {
         Bundle favBundle = new Bundle();
         favBundle.putParcelableArrayList("favorites", listOfFavorites);
 
+        Bundle highlowBundle = new Bundle();
+        ArrayList<Place> allPlaces = new ArrayList<Place>();
+        for(County c : listOfCounties) {
+            for(Place p : c.getListOfPlaces()) {
+                allPlaces.add(p);
+            }
+        }
+        highlowBundle.putParcelableArrayList("allplaces", allPlaces);
+
         List<Fragment> fragments = new ArrayList<Fragment>();
 
         OverviewListFragment listFragment = new OverviewListFragment();
@@ -164,10 +173,13 @@ public class MainActivity extends ActionBarActivity {
         listFragment.setArguments(bundle);
         kartFragment.setArguments(bundle);
         favoritesFragment.setArguments(favBundle);
+        HighLowFragment highLowFragment = new HighLowFragment();
+        highLowFragment.setArguments(highlowBundle);
 
         fragments.add(kartFragment);
         fragments.add(listFragment);
         fragments.add(favoritesFragment);
+        fragments.add(highLowFragment);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
 
@@ -182,17 +194,6 @@ public class MainActivity extends ActionBarActivity {
         //Style tabs
         tabs.setIndicatorColor(getResources().getColor(R.color.viewpager_indicator_color));
         tabs.setShouldExpand(false);
-
-        try {
-            ViewConfiguration config = ViewConfiguration.get(this);
-            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
-            if (menuKeyField != null) {
-                menuKeyField.setAccessible(true);
-                menuKeyField.setBoolean(config, false);
-            }
-        } catch (Exception ex) {
-            // Ignore
-        }
 
     }
 
