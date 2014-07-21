@@ -13,6 +13,7 @@ public class Place implements Parcelable, Comparable {
     private String shortName, longName, municipality, weatherDescription, placeID, airTemp;
     private double geo_lat, geo_long;
     private DateTime lastUpdated;
+    private boolean isFavorite;
 
     public Place() {
     }
@@ -93,6 +94,14 @@ public class Place implements Parcelable, Comparable {
         return lastUpdated;
     }
 
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean isFavorite) {
+        this.isFavorite = isFavorite;
+    }
+
     public void setLastUpdated(DateTime lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
@@ -132,6 +141,7 @@ public class Place implements Parcelable, Comparable {
                 ", geo_lat=" + geo_lat +
                 ", geo_long=" + geo_long +
                 ", lastUpdated=" + lastUpdated +
+                ", isFavorite=" + isFavorite +
                 '}';
     }
 
@@ -166,6 +176,7 @@ public class Place implements Parcelable, Comparable {
         dest.writeDouble(geo_lat);
         dest.writeDouble(geo_long);
         dest.writeString(lastUpdated.toString());
+        dest.writeByte((byte) (isFavorite ? 1 : 0));
 
     }
 
@@ -180,6 +191,7 @@ public class Place implements Parcelable, Comparable {
         geo_lat = in.readDouble();
         geo_long = in.readDouble();
         lastUpdated = DateTime.parse(in.readString());
+        isFavorite = in.readByte() != 0;
     }
 
     /*

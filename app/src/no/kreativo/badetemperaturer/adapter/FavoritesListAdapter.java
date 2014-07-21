@@ -25,8 +25,6 @@ public class FavoritesListAdapter extends ArrayAdapter<Place> {
         this.resource = resource;
         this.context = context;
         inflater = LayoutInflater.from(context);
-        Log.d("APP", "number of favs " + data.size());
-
     }
 
     @Override
@@ -50,7 +48,8 @@ public class FavoritesListAdapter extends ArrayAdapter<Place> {
         Place place = favorites.get(position);
 
         viewHolder.nameTextView.setText(place.getShortName());
-        viewHolder.tempTextView.setText(Integer.toString(place.getWaterTemp()));
+        viewHolder.tempTextView.setText(Double.toString(Double.parseDouble(Integer.toString(place.getWaterTemp()))) + "°C");
+
 
         return convertView;
 

@@ -2,88 +2,129 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
+                android:orientation="horizontal">
 
     <LinearLayout
-        android:id="@+id/container1"
-        android:orientation="vertical"
-        android:layout_centerVertical="true"
+        android:id="@+id/favContainer"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp">
 
-        <TextView
-            android:id="@+id/staticTemp"
+        <ImageView
+            android:id="@+id/favButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:textSize="11sp"
-            android:text="Vanntemperatur:"/>
-
-        <TextView
-            android:id="@+id/windowTemp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:text="20C"/>
-
+            android:src="@drawable/ic_action_rating_not_important"/>
 
     </LinearLayout>
 
-
-    <LinearLayout
-        android:id="@+id/container2"
-        android:orientation="vertical"
+    <RelativeLayout
+        android:id="@+id/contentContainer"
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/container1">
+        android:paddingTop="3dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_below="@+id/favContainer">
 
-        <TextView
-            android:id="@+id/windowPlaceShort"
+        <LinearLayout
+            android:id="@+id/container1"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/staticTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:textSize="11sp"
+                android:text="Vanntemperatur:"/>
+
+            <TextView
+                android:id="@+id/windowTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:text="20C"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/container2"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="Short name"
-            android:textStyle="bold"></TextView>
+            android:layout_toRightOf="@+id/container1">
 
-        <TextView
-            android:id="@+id/windowPlaceLong"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="Long name"
-            android:layout_below="@+id/windowPlaceShort"></TextView>
+            <TextView
+                android:id="@+id/windowPlaceShort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="Short name"
+                android:textStyle="bold"></TextView>
 
-        <TextView
-            android:id="@+id/windowKommune"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="Kommune"
-            android:layout_below="@+id/windowPlaceLong"></TextView>
+            <TextView
+                android:id="@+id/windowPlaceLong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="Long name"
+                android:layout_below="@+id/windowPlaceShort"></TextView>
 
-        <TextView
-            android:id="@+id/windowAirTemp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="18C"
-            android:textSize="12sp"/>
+            <TextView
+                android:id="@+id/windowKommune"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="Kommune"
+                android:layout_below="@+id/windowPlaceLong"></TextView>
 
-        <TextView
-            android:id="@+id/windowWeather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="Weather"
-            android:layout_below="@+id/windowKommune"></TextView>
+            <TextView
+                android:id="@+id/windowAirTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="18C"
+                android:textSize="12sp"/>
 
-        <TextView
-            android:id="@+id/windowLastUpdate"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/windowWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="Weather"
+                android:layout_below="@+id/windowKommune"></TextView>
+
+            <TextView
+                android:id="@+id/windowLastUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="Last update"
+                android:layout_below="@+id/windowWeather"></TextView>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contentContainer"
+        android:paddingTop="5dp">
+
+        <Button
+            android:id="@+id/closeButton"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="Last update"
-            android:layout_below="@+id/windowWeather"></TextView>
+            android:text="@string/close"/>
     </LinearLayout>
 
 

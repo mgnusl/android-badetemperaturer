@@ -5,12 +5,14 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,6 +28,7 @@ import fr.nicolaspomepuy.discreetapprate.RetryPolicy;
 import no.kreativo.badetemperaturer.adapter.ViewPagerAdapter;
 import no.kreativo.badetemperaturer.data.County;
 import no.kreativo.badetemperaturer.data.Place;
+import no.kreativo.badetemperaturer.database.DatabaseHelper;
 import no.kreativo.badetemperaturer.utils.Utils;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
@@ -45,6 +48,7 @@ public class MainActivity extends ActionBarActivity {
     private ArrayList<County> listOfCounties;
     private ArrayList<Place> listOfFavorites;
     private ViewPager viewPager;
+    private DatabaseHelper dbHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,8 @@ public class MainActivity extends ActionBarActivity {
 
         listOfCounties = new ArrayList<County>();
         listOfFavorites = new ArrayList<Place>();
+
+        dbHelper = DatabaseHelper.getInstance(getApplicationContext());
 
         new AsyncHandleXML().execute("http://om.yr.no/badetemperatur/badetemperatur.xml");
 
@@ -153,9 +159,7 @@ public class MainActivity extends ActionBarActivity {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("counties", listOfCounties);
 
-        Bundle favBundle = new Bundle();
-        favBundle.putParcelableArrayList("favorites", listOfFavorites);
-
+        // High-low data
         Bundle highlowBundle = new Bundle();
         ArrayList<Place> allPlaces = new ArrayList<Place>();
         for(County c : listOfCounties) {
@@ -164,6 +168,22 @@ public class MainActivity extends ActionBarActivity {
             }
         }
         highlowBundle.putParcelableArrayList("allplaces", allPlaces);
+
+        // Update isFavorite field in favorite Places (bad solution)
+        for (String s : dbHelper.getAllFavorites()) {
+            for (County c : listOfCounties) {
+                for (Place p : c.getListOfPlaces()) {
+                    if (p.getShortName().equals(s)) {
+                        p.setFavorite(true);
+                        listOfFavorites.add(p);
+                    }
+                }
+            }
+        }
+        Bundle favBundle = new Bundle();
+        favBundle.putParcelableArrayList("favorites", listOfFavorites);
+        favBundle.putParcelableArrayList("counties", listOfCounties);
+
 
         List<Fragment> fragments = new ArrayList<Fragment>();
 
@@ -241,6 +261,8 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_refresh:
+                listOfCounties.clear();
+                listOfFavorites.clear();
                 new AsyncHandleXML().execute("http://om.yr.no/badetemperatur/badetemperatur.xml");
                 return true;
             case R.id.action_about:

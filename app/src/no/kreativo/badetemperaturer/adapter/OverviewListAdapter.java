@@ -13,6 +13,7 @@ import no.kreativo.badetemperaturer.ExtendedInfoDialog;
 import no.kreativo.badetemperaturer.R;
 import no.kreativo.badetemperaturer.data.County;
 import no.kreativo.badetemperaturer.data.Place;
+import no.kreativo.badetemperaturer.database.DatabaseHelper;
 
 import java.util.ArrayList;
 
@@ -91,11 +92,7 @@ public class OverviewListAdapter extends SectionAdapter {
     @Override
     public void onRowItemClick(AdapterView<?> parent, View view, int section, int row, long id) {
         super.onRowItemClick(parent, view, section, row, id);
-        Log.d("APP", "Section: " + Integer.toString(section) + ". Row: " + Integer.toString(row));
         ExtendedInfoDialog cdd = new ExtendedInfoDialog((Activity) context, data.get(section).getListOfPlaces().get(row));
         cdd.show();
-
     }
-
-
 }
