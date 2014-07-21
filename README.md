@@ -1,2 +1,2 @@
-android-badevannstemperaturer
+android-badetemperaturer
 =============================
