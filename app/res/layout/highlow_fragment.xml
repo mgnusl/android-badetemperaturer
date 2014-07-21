@@ -19,6 +19,12 @@
             android:textColor="#df0000"
             android:textStyle="bold"/>
 
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_below="@+id/varmest"/>
+
         <LinearLayout
             android:id="@+id/subcontainer1"
             android:layout_width="fill_parent"
@@ -38,7 +44,7 @@
                 android:id="@+id/warm1Temp"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="40"
+                android:layout_weight="20"
                 android:text="20 C"
                 android:paddingTop="@dimen/text_padding"/>
 
@@ -63,7 +69,7 @@
                 android:id="@+id/warm2Temp"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="40"
+                android:layout_weight="20"
                 android:text="20 C"
                 android:paddingTop="@dimen/text_padding"/>
 
@@ -88,7 +94,7 @@
                 android:id="@+id/warm3Temp"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="40"
+                android:layout_weight="20"
                 android:text="20 C"
                 android:paddingTop="@dimen/text_padding"/>
 
@@ -111,6 +117,12 @@
             android:textColor="#005edf"
             android:textStyle="bold"/>
 
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_below="@+id/kaldest"/>
+
         <LinearLayout
             android:id="@+id/subcontainer4"
             android:layout_width="fill_parent"
@@ -130,7 +142,7 @@
                 android:id="@+id/cold1Temp"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="40"
+                android:layout_weight="20"
                 android:text="20 C"
                 android:paddingTop="@dimen/text_padding"/>
 
@@ -155,7 +167,7 @@
                 android:id="@+id/cold2Temp"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="40"
+                android:layout_weight="20"
                 android:text="20 C"
                 android:paddingTop="@dimen/text_padding"/>
 
@@ -180,7 +192,7 @@
                 android:id="@+id/cold3Temp"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="40"
+                android:layout_weight="20"
                 android:text="20 C"
                 android:paddingTop="@dimen/text_padding"/>
 

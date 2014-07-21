@@ -3,9 +3,11 @@ package no.kreativo.badetemperaturer;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import com.applidium.headerlistview.HeaderListView;
 import no.kreativo.badetemperaturer.adapter.OverviewListAdapter;
@@ -33,6 +35,7 @@ public class OverviewListFragment extends Fragment {
         ListView lv = listView.getListView();
         lv.setDivider(new ColorDrawable(getResources().getColor(R.color.list_divider)));
         lv.setDividerHeight(1);
+
 
         return view;
 

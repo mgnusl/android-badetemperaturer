@@ -1,5 +1,6 @@
 package no.kreativo.badetemperaturer.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
 import com.applidium.headerlistview.SectionAdapter;
+import no.kreativo.badetemperaturer.ExtendedInfoDialog;
 import no.kreativo.badetemperaturer.R;
 import no.kreativo.badetemperaturer.data.County;
 import no.kreativo.badetemperaturer.data.Place;
@@ -52,10 +54,10 @@ public class OverviewListAdapter extends SectionAdapter {
         }
 
         Place place = data.get(section).getListOfPlaces().get(row);
-        TextView placeTextView = (TextView)convertView.findViewById(R.id.nameTextView);
+        TextView placeTextView = (TextView) convertView.findViewById(R.id.nameTextView);
         placeTextView.setText(place.getShortName());
 
-        TextView tempTextView = (TextView)convertView.findViewById(R.id.tempTextView);
+        TextView tempTextView = (TextView) convertView.findViewById(R.id.tempTextView);
         tempTextView.setText(Double.toString(Double.parseDouble(Integer.toString(place.getWaterTemp()))) + "°C");
 
         return convertView;
@@ -90,6 +92,10 @@ public class OverviewListAdapter extends SectionAdapter {
     public void onRowItemClick(AdapterView<?> parent, View view, int section, int row, long id) {
         super.onRowItemClick(parent, view, section, row, id);
         Log.d("APP", "Section: " + Integer.toString(section) + ". Row: " + Integer.toString(row));
+        ExtendedInfoDialog cdd = new ExtendedInfoDialog((Activity) context, data.get(section).getListOfPlaces().get(row));
+        cdd.show();
+
     }
+
 
 }
