@@ -2,6 +2,7 @@ package no.kreativo.badetemperaturer;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +21,15 @@ public class FavoritesFragment extends Fragment {
     private ArrayList<County> listOfCounties;
     private DatabaseHelper dbHelper;
     private FavoritesListAdapter adapter;
+    private TextView empty1, empty2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.favorites_fragment, container, false);
 
         dbHelper = DatabaseHelper.getInstance(getActivity().getApplicationContext());
+        empty1 = (TextView) view.findViewById(R.id.empty1);
+        empty2 = (TextView) view.findViewById(R.id.empty2);
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -38,8 +42,6 @@ public class FavoritesFragment extends Fragment {
         listView.setAdapter(adapter);
 
         if (listOfFavorites.size() > 0) {
-            TextView empty1 = (TextView) view.findViewById(R.id.empty1);
-            TextView empty2 = (TextView) view.findViewById(R.id.empty2);
             empty1.setVisibility(View.GONE);
             empty2.setVisibility(View.GONE);
         }
@@ -68,6 +70,14 @@ public class FavoritesFragment extends Fragment {
                             listOfFavorites.add(p);
                         }
                     }
+                }
+            }
+        }
+        if (listOfFavorites != null) {
+            if (listOfFavorites.size() > 0) {
+                if (empty1 != null && empty2 != null) {
+                    empty1.setVisibility(View.GONE);
+                    empty2.setVisibility(View.GONE);
                 }
             }
         }
