@@ -25,12 +25,24 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     }
 
     public CharSequence getPageTitle(int position) {
-        if (position == 0)
+        switch (position) {
+            case 0:
+                return "Kart";
+            case 1:
+                return "Oversikt";
+            case 2:
+                return "Favoritter";
+            case 3:
+                return "Kaldest og varmest";
+        }
+        /*if (position == 0)
             return "Kart";
         if (position == 1)
             return "Oversikt";
         if (position == 2)
             return "Favoritter";
+        if (position == 3)
+            return "Kaldest og varmest";*/
         return null;
     }
 }

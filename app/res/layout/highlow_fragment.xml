@@ -5,9 +5,187 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <ListView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/highlowListView"></ListView>
+    <RelativeLayout
+        android:id="@+id/container1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/varmest"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/varmest"
+            android:textColor="#df0000"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:id="@+id/subcontainer1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/varmest">
+
+            <TextView
+                android:id="@+id/warm1"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:text="Oslo"
+                android:paddingTop="@dimen/text_padding"/>
+
+            <TextView
+                android:id="@+id/warm1Temp"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:text="20 C"
+                android:paddingTop="@dimen/text_padding"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/subcontainer2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/subcontainer1">
+
+            <TextView
+                android:id="@+id/warm2"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:text="Oslo"
+                android:paddingTop="@dimen/text_padding"/>
+
+            <TextView
+                android:id="@+id/warm2Temp"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:text="20 C"
+                android:paddingTop="@dimen/text_padding"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/subcontainer3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/subcontainer2">
+
+            <TextView
+                android:id="@+id/warm3"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:text="Oslo"
+                android:paddingTop="@dimen/text_padding"/>
+
+            <TextView
+                android:id="@+id/warm3Temp"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:text="20 C"
+                android:paddingTop="@dimen/text_padding"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/container2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_below="@+id/container1">
+
+        <TextView
+            android:id="@+id/kaldest"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/kaldest"
+            android:textColor="#005edf"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:id="@+id/subcontainer4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/kaldest">
+
+            <TextView
+                android:id="@+id/cold1"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:text="Oslo"
+                android:paddingTop="@dimen/text_padding"/>
+
+            <TextView
+                android:id="@+id/cold1Temp"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:text="20 C"
+                android:paddingTop="@dimen/text_padding"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/subcontainer5"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/subcontainer4">
+
+            <TextView
+                android:id="@+id/cold2"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:text="Oslo"
+                android:paddingTop="@dimen/text_padding"/>
+
+            <TextView
+                android:id="@+id/cold2Temp"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:text="20 C"
+                android:paddingTop="@dimen/text_padding"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/subcontainer6"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/subcontainer5">
+
+            <TextView
+                android:id="@+id/cold3"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:text="Oslo"
+                android:paddingTop="@dimen/text_padding"/>
+
+            <TextView
+                android:id="@+id/cold3Temp"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:text="20 C"
+                android:paddingTop="@dimen/text_padding"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

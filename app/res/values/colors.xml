@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="actionbar_color">#0096D2</color>
-    <color name="section_header_color">#0078a8</color>
+    <color name="actionbar_color">#297aaa</color>
+    <color name="section_header_color">#3599d7</color>
     <color name="list_item_color">#e6e6e6</color>
 
     <color name="header_text_color">#fcfcfc</color>

@@ -7,7 +7,7 @@ import org.joda.time.Period;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
-public class Place implements Parcelable {
+public class Place implements Parcelable, Comparable {
 
     private int waterTemp;
     private String shortName, longName, municipality, weatherDescription, placeID, airTemp;
@@ -180,5 +180,20 @@ public class Place implements Parcelable {
         geo_lat = in.readDouble();
         geo_long = in.readDouble();
         lastUpdated = DateTime.parse(in.readString());
+    }
+
+    /*
+            Comparable method
+     */
+
+    @Override
+    public int compareTo(Object another) {
+        Place p = (Place)another;
+        if(this.waterTemp == p.getWaterTemp())
+            return 0;
+        else if(this.waterTemp > p.getWaterTemp())
+            return 1;
+        else
+            return -1;
     }
 }

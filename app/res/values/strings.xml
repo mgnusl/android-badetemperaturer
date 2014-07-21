@@ -9,4 +9,7 @@
 
     <string name="close">Lukk</string>
 
+    <string name="varmest">Varmest</string>
+    <string name="kaldest">Kaldest</string>
+
 </resources>
