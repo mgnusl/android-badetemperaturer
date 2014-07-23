@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.astuetz.PagerSlidingTabStrip;
 import de.psdev.licensesdialog.LicensesDialog;
 import de.psdev.licensesdialog.licenses.ApacheSoftwareLicense20;
@@ -60,7 +61,11 @@ public class MainActivity extends ActionBarActivity {
 
         dbHelper = DatabaseHelper.getInstance(getApplicationContext());
 
-        new AsyncHandleXML().execute("http://om.yr.no/badetemperatur/badetemperatur.xml");
+        if(Utils.isNetworkAvailable(getApplicationContext()))
+            new AsyncHandleXML().execute("http://om.yr.no/badetemperatur/badetemperatur.xml");
+        else
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.no_connection), Toast.LENGTH_LONG).show();
+
 
         AppRate.with(this).initialLaunchCount(3).retryPolicy(RetryPolicy.EXPONENTIAL)
                 .checkAndShow();
@@ -187,17 +192,17 @@ public class MainActivity extends ActionBarActivity {
 
         List<Fragment> fragments = new ArrayList<Fragment>();
 
-        OverviewListFragment listFragment = new OverviewListFragment();
+        OverviewListFragment overviewListFragment = new OverviewListFragment();
         KartFragment kartFragment = new KartFragment();
         FavoritesFragment favoritesFragment = new FavoritesFragment();
-        listFragment.setArguments(bundle);
+        overviewListFragment.setArguments(bundle);
         kartFragment.setArguments(bundle);
         favoritesFragment.setArguments(favBundle);
         HighLowFragment highLowFragment = new HighLowFragment();
         highLowFragment.setArguments(highlowBundle);
 
         fragments.add(kartFragment);
-        fragments.add(listFragment);
+        fragments.add(overviewListFragment);
         fragments.add(favoritesFragment);
         fragments.add(highLowFragment);
 
@@ -263,7 +268,11 @@ public class MainActivity extends ActionBarActivity {
             case R.id.action_refresh:
                 listOfCounties.clear();
                 listOfFavorites.clear();
-                new AsyncHandleXML().execute("http://om.yr.no/badetemperatur/badetemperatur.xml");
+                if(Utils.isNetworkAvailable(getApplicationContext()))
+                    new AsyncHandleXML().execute("http://om.yr.no/badetemperatur/badetemperatur.xml");
+                else {
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.no_connection), Toast.LENGTH_LONG).show();
+                }
                 return true;
             case R.id.action_about:
                 showAboutPopup();

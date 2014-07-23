@@ -10,9 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -28,6 +31,7 @@ public class KartFragment extends Fragment {
     private HashMap<Marker, Place> markerMap;
     private GoogleMap map;
     private Button southButton, northButton, westButton, eastButton;
+    private AdView adView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,6 +41,10 @@ public class KartFragment extends Fragment {
         if (bundle != null) {
             listOfCounties = bundle.getParcelableArrayList("counties");
         }
+
+        adView = (AdView) view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         markerMap = new HashMap<Marker, Place>();
 
@@ -58,6 +66,8 @@ public class KartFragment extends Fragment {
             for (Place p : c.getListOfPlaces()) {
                 LatLng place = new LatLng(p.getGeo_lat(), p.getGeo_long());
                 Marker marker = map.addMarker(new MarkerOptions()
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
+                                //.anchor(0.0f, 0.0f)
                         .title(p.getShortName())
                         .snippet(p.getLongName())
                         .position(place));
@@ -194,5 +204,11 @@ public class KartFragment extends Fragment {
             return null;
         }
 
+    }
+
+    @Override
+    public void onDestroy() {
+        adView.destroy();
+        super.onDestroy();
     }
 }

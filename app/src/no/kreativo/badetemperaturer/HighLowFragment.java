@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import no.kreativo.badetemperaturer.data.Place;
 
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import java.util.Collections;
 public class HighLowFragment extends Fragment {
 
     private ArrayList<Place> listOfPlaces;
+    private AdView adView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -24,6 +27,10 @@ public class HighLowFragment extends Fragment {
         if (bundle != null) {
             listOfPlaces = bundle.getParcelableArrayList("allplaces");
         }
+
+        adView = (AdView) view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         Collections.sort(listOfPlaces);
 
@@ -42,5 +49,11 @@ public class HighLowFragment extends Fragment {
         ((TextView) view.findViewById(R.id.warm3Temp)).setText(Integer.toString(listOfPlaces.get(listOfPlaces.size()-3).getWaterTemp()) + "°C");
 
         return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        adView.destroy();
+        super.onDestroy();
     }
 }

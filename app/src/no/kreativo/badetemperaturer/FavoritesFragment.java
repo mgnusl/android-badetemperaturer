@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import no.kreativo.badetemperaturer.adapter.FavoritesListAdapter;
 import no.kreativo.badetemperaturer.data.County;
 import no.kreativo.badetemperaturer.data.Place;
@@ -22,6 +24,7 @@ public class FavoritesFragment extends Fragment {
     private DatabaseHelper dbHelper;
     private FavoritesListAdapter adapter;
     private TextView empty1, empty2;
+    private AdView adView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +33,10 @@ public class FavoritesFragment extends Fragment {
         dbHelper = DatabaseHelper.getInstance(getActivity().getApplicationContext());
         empty1 = (TextView) view.findViewById(R.id.empty1);
         empty2 = (TextView) view.findViewById(R.id.empty2);
+
+        adView = (AdView) view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -81,5 +88,11 @@ public class FavoritesFragment extends Fragment {
                 }
             }
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        adView.destroy();
+        super.onDestroy();
     }
 }

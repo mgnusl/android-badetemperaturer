@@ -12,4 +12,8 @@
     <string name="varmest">Varmest</string>
     <string name="kaldest">Kaldest</string>
 
+    <string name="no_connection">Ingen internett-tilkobling tilgjengelig.</string>
+
+    <string name="ad_id">ca-app-pub-9674543417311938/5161726802</string>
+
 </resources>
